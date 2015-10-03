@@ -17,7 +17,6 @@ io.on('connection', function (socket){
 		console.log("numero de usuario: "+usuarios.length)
 	})
 	socket.on('message', function (data){
-		console.log(socket.id+" DIJO MENSAJE:  "+data)
 		var sockets = io.sockets.sockets
 		var nameUser;
 		usuarios.forEach(function(user){
@@ -26,6 +25,7 @@ io.on('connection', function (socket){
 				nameUser = user.name
 			}
 		});
+		console.log(nameUser+"  DIJO MENSAJE:  "+data)
 		sockets.forEach(function(sock){
 			if (sock.id != socket.id){
 				sock.emit('message', { name:nameUser, message: data })
